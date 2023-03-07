@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Weather : <span class="wet"></span></h1>
+    <h2>humadity : <span class="hum"></span></h2>
+    <button class="btn">CLICK</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"
+        integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let btn = document.querySelector(".btn")
+        let wet = document.querySelector(".wet")
+        let hum = document.querySelector(".hum")
+        btn.addEventListener("click", fetchWeather)
+       async function fetchWeather() {
+
+            let weater = await axios.get("http://localhost:3000/weather")
+            data = weater.data
+            console.log(data);
+            wet.innerHTML= data.temp
+            hum.innerHTML= data.humadity
+        }
+    </script>
+</body>
+
+</html>
