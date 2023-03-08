@@ -8,15 +8,17 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 
 })
-app.get('/weather',(req,res)=>{
+app.get('/weather', (req, res) => {
     res.send(
-        {temp:30,
-        humadity:431.2,
-    });
-    console.log("our Response",res)
+        {
+            temp: 30,
+            humadity: 431.2,
+        });
+    console.log("our Response", res)
 })
 
 app.use('/page', express.static('./web'))
+
 app.get('/contact', (req, res) => {
     res.send(`<h1>It's Contact Section</h1>`)
 
