@@ -5,7 +5,7 @@ import cors from "cors"
 app.use(express.json());
 app.use(cors())
 
-const database = []
+let database = [];
 
 app.get('/', (req, res) => {
     console.log(new Date().toString())
@@ -32,7 +32,7 @@ app.use('/page', express.static('./web'))
 
 app.get('/contact', (req, res) => {
     res.send(`<h1>It's Contact Section</h1>`)
-    
+
 })
 
 
