@@ -94,30 +94,12 @@ app.delete('/clear_all', (req, res) => {
 })
 // search by ID
 
-app.get('/products/:id', (req, res) => {
+app.get('/products/:id', async (req, res) => {
 
-    let id = req.params.id
-
-    res.send("wowo")
-
-
-
-    // const fetch = async () => {
-    //     try {
-    //         let productFetched = await productModel.find({})
-    //         if (!productFetched) {
-    //             res.status(400).send(`Failed to fetch  product`)
-    //             console.log("nhi");
-    //         }
-    //         else {
-    //             console.log("he", productFetched);
-    //             res.status(200).send(productFetched)
-    //         }
-    //     } catch (error) {
-    //         res.status(200).send(`Faild to get product `)
-    //     }
-    // }
-    // fetch()
+    let id = req.params.id.toString()
+    const findData = await productModel.findOne({ _id: id })
+    console.log(id)
+    res.send(findData)
 })
 app.use('/page', express.static('./web'))
 
