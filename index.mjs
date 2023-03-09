@@ -17,16 +17,55 @@ app.post('/addproduct', (req, res) => {
     console.log("product :", req.body)
     res.send(`Done, added product ${name}`);
     database.push({
+        productId: `${new Date().getTime()}`,
         productName: name,
         productPrice: price
     })
-    console.log("Data From DB", database);
+    console.log("Product Added");
 
 })
- app.get('/products', (req,res)=>{
+app.get('/products', (req, res) => {
     res.send(database)
 
- })
+})
+
+// let id = 343242
+
+// database= [
+//     {
+//     id:402304,
+//     name:"asd"
+// },
+// {
+//     id:343242,
+//     name:"asd"
+// },
+// {
+//     id:938434,
+//     name:"asd"
+// }
+// ]
+
+
+
+app.post('/delete_product', (req, res) => {
+    const id = req.body.deleteID.toString()
+
+    for (let i = 0; i < database.length; i++) {
+        if (database[i].productId == id) {
+            database.splice(i,1)
+            console.log("Yes", database[i])
+        }
+        else { console.log("sooryy", database[i].productId,); }
+    }
+    res.send(database)
+})
+
+app.delete('/clear_all', (req, res) => {
+    database = []
+    console.log(database);
+    res.send(database)
+})
 
 app.use('/page', express.static('./web'))
 
