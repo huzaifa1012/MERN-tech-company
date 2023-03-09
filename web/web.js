@@ -19,7 +19,6 @@ const add_Product = async () => {
   }).catch((err) => {
     console.log("Try Again", err)
   });
-
 }
 addProduct.addEventListener("click", add_Product)
 
@@ -30,11 +29,10 @@ const get_Product = async () => {
     console.log(getAllProduct.data)
     main_box.innerHTML = ""
     for (let i = 0; i < getAllProduct.data.length; i++) {
-
-      console.log(`${getAllProduct.data[i].productName}  ${getAllProduct.data[i].productPrice}`);
+      console.log(`${getAllProduct.data[i].name}  ${getAllProduct.data[i].price}`);
       main_box.innerHTML += `
-        <h1 onClick="Delete_product(${getAllProduct.data[i].productId})" >${getAllProduct.data[i].productName} <span> ${getAllProduct.data[i].productPrice}</span> </h1>
-                `}
+ <h1 onClick="Delete_product(${getAllProduct.data[i].productId})" >${getAllProduct.data[i].name} <span> ${getAllProduct.data[i].price}</span> </h1>`
+    }
   } catch (error) {
     console.log("can't get products Error :", error);
   }
