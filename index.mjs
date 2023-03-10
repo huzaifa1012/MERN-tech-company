@@ -73,16 +73,31 @@ app.get('/products', (req, res) => {
     fetch()
 })
 
-app.post('/delete_product', (req, res) => {
-    const id = req.body.deleteID.toString()
+app.delete('/delete_product/:id', async (req, res) => {
+    const id = req.params.id
+    try {
 
-    for (let i = 0; i < database.length; i++) {
-        if (database[i].productId == id) {
-            database.splice(i, 1)
-            console.log("Yes", database[i])
+        let isDelete = await productModel.deleteOne({ _id: id }); // returns {deletedCount: 1}
+        console.log("Yes", isDelete)
+        if (isDelete.deletedCount == !1) {
+            res.status(404).send({ message: "sorry your data can't be deleted" })
+            console.log("deleted count", isDelete.deletedCount)
+        return;
         }
-        else { console.log("sooryy", database[i].productId,); }
+        else {
+            res.status(200).send({ message: "Data deleted by Given ID" })
+        }
+    } catch (err) {
+        console.log("sorry It's Catch");
+
     }
+    // for (let i = 0; i < database.length; i++) {
+    //     if (database[i].productId == id) {
+    //         database.splice(i, 1)
+    //         console.log("Yes", database[i])
+    //     }
+    //     else { console.log("sooryy", database[i].productId,); }
+    // }
     res.send(database)
 })
 

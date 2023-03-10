@@ -26,11 +26,9 @@ addProduct.addEventListener("click", add_Product)
 const get_Product = async () => {
   try {
     let getAllProduct = await axios.get("http://localhost:3000/products")
-    console.log(getAllProduct.data)
     main_box.innerHTML = ""
     for (let i = 0; i < getAllProduct.data.length; i++) {
-      console.log(`${getAllProduct.data[i].name}  ${getAllProduct.data[i].price}`);
-      main_box.innerHTML += `
+    main_box.innerHTML += `
  <h1 onClick="Delete_product(${getAllProduct.data[i].productId})" >${getAllProduct.data[i].name} <span> ${getAllProduct.data[i].price}</span> </h1>`
     }
   } catch (error) {
