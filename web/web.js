@@ -1,6 +1,7 @@
 let addProduct = document.querySelector(".addBtn")
 let getProduct = document.querySelector(".getBtn")
-let clearAll = document.querySelector(".clearAll")
+let getIdBtn = document.querySelector(".GetID")
+let idBox = document.querySelector(".idInp")
 let productNameinp = document.querySelector(".name")
 let productPriceinp = document.querySelector(".price")
 let productTitle = document.querySelector(".ptitle")
@@ -48,20 +49,20 @@ const Delete_product = async (id) => {
   )
 
 }
-// Clear All Product
-const clear_All = async () => {
-  let deleted = await axios.delete("http://localhost:3000/clear_all").then(
+// get By ID
+const GetByID = async () => {
+  let searchResult = await axios.post(`http://localhost:3000//products/:${idBox.value}`,{
+    name:prompt(),
+    price:prompt()
+  }).then(
+    (searchResult) => {
 
-    () => {
-
-      main_box.innerHTML = ""
-      console.log("clearAll");
+      console.log(idBox.value,
+        searchResult
+        );
     }
-
   )
-
-
 }
-clearAll.addEventListener("click", clear_All)
+getIdBtn.addEventListener("click", GetByID)
 
 window.Delete_product = Delete_product;

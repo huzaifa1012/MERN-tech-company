@@ -82,47 +82,57 @@ app.delete('/delete_product/:id', async (req, res) => {
         if (isDelete.deletedCount == !1) {
             res.status(404).send({ message: "sorry your data can't be deleted" })
             console.log("deleted count", isDelete.deletedCount)
-        return;
+            return;
         }
         else {
             res.status(200).send({ message: "Data deleted by Given ID" })
         }
     } catch (err) {
         console.log("sorry It's Catch");
-
     }
-    // for (let i = 0; i < database.length; i++) {
-    //     if (database[i].productId == id) {
-    //         database.splice(i, 1)
-    //         console.log("Yes", database[i])
-    //     }
-    //     else { console.log("sooryy", database[i].productId,); }
-    // }
     res.send(database)
 })
-
-
 app.delete('/clear_all', (req, res) => {
     database = []
     console.log(database);
     res.send(database)
 })
+
 // search by ID
-
 app.get('/products/:id', async (req, res) => {
-
     let id = req.params.id.toString()
     const findData = await productModel.findOne({ _id: id })
     console.log(id)
     res.send(findData)
 })
+
+app.post("/products/:id", async (req, res) => {
+
+    let id = req.params.id.toString()
+    console.log(id)
+    try {
+        
+        let updateData = await productModel.findByIdAndUpdate(id,
+            {
+                name: req.body.name,
+                price: req.body.price
+            }, { new: true }).exec();
+            
+      res.status(200).send("Update Successfull")
+    } catch (error) {
+            res.status(404).send("Failed To Update")
+            
+        }
+          
+})
+
+
+// Frontend Page 
 app.use('/page', express.static('./web'))
 
 app.get('/contact', (req, res) => {
     res.send(`<h1>It's Contact Section</h1>`)
-
 })
-
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
