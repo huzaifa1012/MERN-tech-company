@@ -111,19 +111,19 @@ app.post("/products/:id", async (req, res) => {
     let id = req.params.id.toString()
     console.log(id)
     try {
-        
         let updateData = await productModel.findByIdAndUpdate(id,
             {
                 name: req.body.name,
                 price: req.body.price
-            }, { new: true }).exec();
-            
-      res.status(200).send("Update Successfull")
+            },
+            { new: true }).exec();
+
+        res.status(200).send("Update Successfull")
     } catch (error) {
-            res.status(404).send("Failed To Update")
-            
-        }
-          
+        res.status(404).send("Failed To Update")
+
+    }
+
 })
 
 
