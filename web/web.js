@@ -11,7 +11,7 @@ let main_box = document.querySelector(".all")
 
 // Adding Products
 const add_Product = async () => {
-  let addProduct = await axios.post("https://my-weather-app.cyclic.app/addproduct", {
+  let addProduct = await axios.post("https://vast-rose-lizard-kit.cyclic.app/addproduct", {
     name: productNameinp.value,
     price: productPriceinp.value
   }).then((result) => {
@@ -26,7 +26,7 @@ addProduct.addEventListener("click", add_Product)
 // Getting Products
 const get_Product = async () => {
   try {
-    let getAllProduct = await axios.get("https://my-weather-app.cyclic.app/products")
+    let getAllProduct = await axios.get("https://vast-rose-lizard-kit.cyclic.app/products")
     main_box.innerHTML = ""
     for (let i = 0; i < getAllProduct.data.length; i++) {
     main_box.innerHTML += `
@@ -40,7 +40,7 @@ getProduct.addEventListener("click", get_Product)
 
 // Delete A product
 const Delete_product = async (id) => {
-  let deleted = await axios.post("https://my-weather-app.cyclic.app/delete_product", {
+  let deleted = await axios.post("https://vast-rose-lizard-kit.cyclic.app/delete_product", {
     deleteID: id
   }).then(
     () => {
@@ -54,7 +54,7 @@ const GetByID = async () => {
 let id = idBox.value
 
   console.log("ID", id)
-  let searchResult = await axios.post(`https://my-weather-app.cyclic.app/products/${id}`,{
+  let searchResult = await axios.post(`https://vast-rose-lizard-kit.cyclic.app/products/${id}`,{
     name:prompt(),
     price:prompt()
   })
